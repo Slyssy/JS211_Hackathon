@@ -1,9 +1,6 @@
 'use strict';
 const prompt = require('prompt-sync')({ sigint: true });
-// const number = prompt(
-//   'Enter a positive number to determine how many ramp numbers exist between 1
-//   and that number. Enter number: '
-// );
+const number = prompt('Enter a positive number. ');
 
 // $ Function to convert a number to an array.
 const numToArray = (num) => Array.from(String(num), Number);
@@ -59,7 +56,7 @@ const countRampNumbers = (num) => {
   );
 };
 
-// countRampNumbers(number);
+countRampNumbers(number);
 
 const string = prompt('Enter a word, paragraph or novel: ');
 
