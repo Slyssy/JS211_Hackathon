@@ -49,7 +49,9 @@ const countRampNumbers = (num) => {
   // $ returns true.
   const rampArray = rangeArray.filter((num) => isRampNumber(num));
   console.log(rampArray);
-  console.log(rampArray.length);
+  console.log(
+    `There are ${rampArray.length} ramp numbers between 1 and ${num}.`
+  );
 };
 
 countRampNumbers(123);
