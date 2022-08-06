@@ -1,8 +1,6 @@
 'use strict';
 const prompt = require('prompt-sync')({ sigint: true });
-const number = prompt(
-  'Enter a positive number to determine how many ramp numbers exist between 1 and that number. Enter number:'
-);
+const number = prompt('Enter a positive number. ');
 
 // $ Function to convert a number to an array.
 const numToArray = (num) => Array.from(String(num), Number);
@@ -60,6 +58,35 @@ const countRampNumbers = (num) => {
 
 countRampNumbers(number);
 
-const alpha = Array.from(Array(26)).map((e, i) => i + 65);
-const alphabet = alpha.map((x) => String.fromCharCode(x));
-console.log(alphabet);
+// $ Create a variable to store the user's input.
+const string = prompt('Enter a word, paragraph or novel: ');
+
+//$ Removing special characters and numbers from the string.
+const charsOnly = string.replace(/[^a-zA-Z]/g, '');
+
+// $Adding characters to a string
+const arrayOfChars = [...charsOnly];
+
+// $ Loop over the array of characters and count each character and counting
+// $each time a character appears and putting results in a count object.
+const count = {};
+
+for (const char of arrayOfChars) {
+  // $ If the character exists in the count object, add 1 to it. If not, it's a
+  // $ new character, and you will set it's value equal to 1.
+  if (count[char]) {
+    count[char] += 1;
+  } else {
+    count[char] = 1;
+  }
+}
+
+console.log(count);
+// $ Create an array of the keys from the count object.
+const keys = Object.keys(count);
+
+// $ Loop over the keys array and using each key to grab the value for each key
+// $in the count object.
+keys.forEach((key) => {
+  console.log(`${key}: ${count[key]}`);
+});

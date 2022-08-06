@@ -23,3 +23,22 @@ number of ramp numbers that are less than it.
 9. Loop over that array and use the filter method to create an array of numbers
    where the isRampNumber function returns true.
 10. Count the length of that array to get the number of ramp numbers.
+
+## Prompt 3: Count It
+
+Given a sentence, paragraph or novel, count the letters in the string. Ignore
+whitespace and anything not [a-z][a-z], i.e. punctuations and numbers.
+
+### Coding Plan
+
+1. Allow user to input a string and set that string to a variable.
+2. Figure out a way to remove the special characters and spaces from that
+   string.
+3. Create an array from the string of letters only.
+4. Loop over the array of letters and count the number of times a character
+   appears.
+5. I'm thinking I'll have to create an object with the letter as the key and the
+   count the value. Starting with a blank object.
+6. I can either leave it as an object, or I can unpack the object by creating an
+   array of keys, and loop over the key array and get the key, and use that key
+   to access the element in the count object.
