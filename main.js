@@ -58,13 +58,8 @@ const countRampNumbers = (num) => {
 
 countRampNumbers(number);
 
+// $ Create a variable to store the user's input.
 const string = prompt('Enter a word, paragraph or novel: ');
-
-// $ Create an array of acceptable characters.
-const alpha = Array.from(Array(26)).map((e, i) => i + 65);
-const alphabetLower = alpha.map((x) => String.fromCharCode(x).toLowerCase());
-const alphabetCaps = alpha.map((x) => String.fromCharCode(x));
-const alphabet = alphabetCaps.concat(alphabetLower);
 
 //$ Removing special characters and numbers from the string.
 const charsOnly = string.replace(/[^a-zA-Z]/g, '');
@@ -76,14 +71,17 @@ const arrayOfChars = [...charsOnly];
 // $each time a character appears and putting results in a count object.
 const count = {};
 
-for (const element of arrayOfChars) {
-  if (count[element]) {
-    count[element] += 1;
+for (const char of arrayOfChars) {
+  // $ If the character exists in the count object, add 1 to it. If not, it's a
+  // $ new character, and you will set it's value equal to 1.
+  if (count[char]) {
+    count[char] += 1;
   } else {
-    count[element] = 1;
+    count[char] = 1;
   }
 }
 
+console.log(count);
 // $ Create an array of the keys from the count object.
 const keys = Object.keys(count);
 
