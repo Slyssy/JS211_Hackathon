@@ -3,11 +3,10 @@ const prompt = require('prompt-sync')({ sigint: true });
 const number = prompt('Enter a positive number. ');
 const assert = require('assert');
 
-// * Function to convert a number to an array.
+//##### Function to convert a number to an array.
 const numToArray = (num) => Array.from(String(num), Number);
 
-// * Function to loop over an array of numbers and determine if the number after
-// * the current # is greater or equal to the previous #.
+//##### Function to filter an array of numbers so that only the numbers that are >= to the number before them are included in an array.
 const isNextNumGreater = (arr) => {
   const resultArray = arr.filter((el, i) => {
     // console.log(el, arr[i - 1]);
@@ -22,7 +21,7 @@ const isNextNumGreater = (arr) => {
   return resultArray;
 };
 
-// * Create a function that accepts a number as an input.
+//###### Function that accepts a number as an input and determines if it is a Ramp Number.
 const isRampNumber = (num) => {
   // * Generate an error if the input is not a number or if the number is not > zero.
   if (typeof num !== 'number' || num <= 0) {
@@ -45,6 +44,7 @@ const isRampNumber = (num) => {
   }
 };
 
+//##### Function to create an array of numbers where the isRampNumber function returns true.
 const countRampNumbers = (num) => {
   // * Create an array of numbers from 1 upto and including the number argument.
   const start = 1;
@@ -61,36 +61,42 @@ const countRampNumbers = (num) => {
 
 countRampNumbers(number);
 
-// * Create a variable to store the user's input.
-const string = prompt('Enter a word, paragraph or novel: ');
+//###### Create a variable to store the user's input.
+const inputString = prompt('Enter a word, paragraph or novel: ');
 
-//* Removing special characters and numbers from the string.
-const charsOnly = string.replace(/[^a-zA-Z]/g, '');
+//##### Function to remove special characters & numbers from a string .
+const charsOnly = (string) => string.replace(/[^a-zA-Z]/g, '').toLowerCase();
 
-// * Adding characters to a string
-const arrayOfChars = [...charsOnly];
+//##### Function to convert a string to an array of characters.
+const stringToArray = (string) => [...string];
+const arrayOfChars = stringToArray(charsOnly(inputString));
 
-// * Loop over the array of characters and count each character and counting
-// * each time a character appears and putting results in a count object.
-const count = {};
+//##### Function to tally the number of times an element appears in an array.
+const createObject = (array) => {
+  const count = array.reduce((acc, cur) => {
+    acc[cur] = (acc[cur] || 0) + 1;
+    return acc;
+  }, {});
 
-for (const char of arrayOfChars) {
-  // * If the character exists in the count object, add 1 to it. If not, it's a
-  // * new character, and you will set it's value equal to 1.
-  count[char] ? (count[char] += 1) : (count[char] = 1);
-}
+  return count;
+};
+const letterCountObject = createObject(arrayOfChars);
 
-console.log(count);
-// * Create an array of the keys from the count object.
-const keys = Object.keys(count);
+// #####Function to iterate over object and return each key and value.
+const parseObject = (object) => {
+  // * Create an array of the keys from the count object.
+  const keys = Object.keys(object);
 
-// * Loop over the keys array and using each key to grab the value for each key
-// * in the count object.
-keys.forEach((key) => {
-  console.log(`${key}: ${count[key]}`);
-});
+  // * Loop over the keys array and using each key to grab the value for each key
+  // * in the count object.
+  keys.forEach((key) => {
+    console.log(`${key}: ${object[key]}`);
+  });
+};
+parseObject(letterCountObject);
 
 // ######## Start Test Section ##########
+// *********************Testing Prompt 2: Ramp Numbers***********************
 if (typeof describe === 'function') {
   const assert = require('assert');
   describe('Testing to see if the number entered is transformed into an array.', () => {
@@ -123,6 +129,15 @@ if (typeof describe === 'function') {
   describe('Testing to see if ramp numbers are detected correctly', () => {
     it('If number after first number is >= to the first number it is a ramp number (Returns True). If not, it returns false.', () => {
       let testNumber = isRampNumber(13);
+      assert.equal(testNumber, true);
+      testNumber = isRampNumber(20);
+      assert.equal(testNumber, false);
+    });
+  });
+  // *********************Testing Prompt 3: Count It***********************
+  describe('Testing to see if spaces and special characters have been removed', () => {
+    it('Should return a string with only letters.', () => {
+      let testString = isRampNumber(13);
       assert.equal(testNumber, true);
       testNumber = isRampNumber(20);
       assert.equal(testNumber, false);
